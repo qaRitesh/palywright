@@ -21,8 +21,8 @@ export function readExcelFile(filePath:string){
 
     //convert raw data into TesteRcord.
     rawData.slice(1).map((column:any)=>({
-        Skill1: column[0];
-        Skill2: column[0];
+        // Skill1: column[0];
+        // Skill2: column[0];
     }))
 
 }
