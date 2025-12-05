@@ -5,7 +5,7 @@ import { WebUtil } from "../VtigerWebutile/webUtil";
 import { LoginAction } from '../VtigerPom/LoginPageAction';
 
 // ---------- Step 1: Resolve Excel Path ----------
-const excelFilePath = path.resolve('C:/Users/my701/OneDrive/Desktop/VtigerPlaywright/TestData/dataBaseVtiger.xlsx');
+const excelFilePath = path.resolve('C:/Users/my701/OneDrive/Desktop/TortoiseGit/palywright/VtigerPlaywright/TestData/dataBaseVtiger.xlsx');
 console.log('Resolved Excel path:', excelFilePath);
 
 // ---------- Step 2: Read Excel ----------
@@ -16,6 +16,7 @@ let excelData: {
   password: string; 
   themeLabel: string; 
   expectedResult: string; 
+  result:String;
 }[] = [];
 
 try {
@@ -36,10 +37,13 @@ for (const row of excelData) {
 
     await util.goToUrl(row.url);
     await login.validateLogin(row.username, row.password, row.themeLabel);
-    if (row.expectedResult.toLowerCase() === 'success') {
+    if (row.result.toLowerCase() === 'success') {
+       await page.waitForLoadState();
       await expect(page).toHaveURL(/Home/);
+     
     } else {
       const errorMsg = page.locator('.error-message'); // update selector
+      await page.waitForLoadState();
       await expect(errorMsg).toBeVisible();
     }
   });

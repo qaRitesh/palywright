@@ -16,19 +16,19 @@ export class WebUtil {
 
   // Type text in input box
   async fillText(locator: Locator, text: string) {
-    await locator.waitFor();
+    await this.page.waitForTimeout(2000)
     await locator.fill(text);
   }
 
    // Select dropdown by Label
   async selectDropdownByLabel(locator: Locator, label: string) {
-    await locator.waitFor();
+    await this.page.waitForTimeout(2000)
     await locator.selectOption({ label });
   }
 
   // Select dropdown by Value
   async selectDropdownByValue(locator: Locator, value: string) {
-    await locator.waitFor();
+    await this.page.waitForTimeout(2000)
     await locator.selectOption({ value });
   }
 
