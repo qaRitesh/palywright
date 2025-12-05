@@ -4,10 +4,11 @@ import { WebUtil } from "../VtigerWebutile/webUtil";
 import { LoginAction } from '../VtigerPom/LoginPageAction';
 
 
-const base = new Base('C:/Users/my701/OneDrive/Desktop/TortoiseGit/palywright/VtigerPlaywright/TestData/dataBaseVtiger.xlsx', 'LoginData');
 
 test('Login test using Excel data', async ({ page }) => {
+  const base = new Base('C:/Users/my701/OneDrive/Desktop/TortoiseGit/palywright/VtigerPlaywright/TestData/dataBaseVtiger.xlsx', 'LoginData');
   const testData = base.getTestDataById('TC_004');
+ 
   const util = new WebUtil(page);
   const login = new LoginAction(page);
 
