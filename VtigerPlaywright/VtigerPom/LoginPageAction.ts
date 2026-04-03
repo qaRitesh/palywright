@@ -1,6 +1,6 @@
 import { WebUtil } from "../VtigerWebutile/webUtil";
 import { LoginOR } from "../VtigerPageor/LoginPage_OR";
-import { Page } from "playwright-core";
+import { Page } from '@playwright/test';
 
 export class LoginAction extends LoginOR {
      private web: WebUtil; 
