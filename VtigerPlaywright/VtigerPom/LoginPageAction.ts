@@ -16,6 +16,5 @@ export class LoginAction extends LoginOR {
         await this.web.fillText(this.passwordInput, password);
         await this.web.selectDropdownByLabel(this.themeDropdown, themeLabel);
         await this.web.clickElement(this.loginButton);
-        await this.page.waitForLoadState();
     }
 }

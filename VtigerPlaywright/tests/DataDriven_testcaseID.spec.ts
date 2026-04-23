@@ -17,8 +17,8 @@ let excelData: { testCaseID: string;
 try {
     const workbook = XLSX.readFile(excelFilePath);
     const sheet = workbook.Sheets['Sheet1'];
-    excelData = XLSX.utils.sheet_to_json(sheet) as any[];
-    console.log('Excel Data:', excelData); // debug
+     excelData = XLSX.utils.sheet_to_json(sheet) as any[];
+     console.log('Excel Data:', excelData); // debug
 } catch (err) {
     console.error('Error reading Excel file:', err);
     process.exit(1); // stop execution if file not found

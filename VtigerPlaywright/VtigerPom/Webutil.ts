@@ -47,6 +47,7 @@ export class WebUtil {
     return selected?.trim() || null;
   }
 
+<<<<<<< remotes/origin/playwright_with_TS
   // Get all dropdown options text
   async getAllOptionsText(elementDrag: Locator): Promise<string[]> {
     await elementDrag.waitFor();
@@ -59,6 +60,14 @@ export class WebUtil {
     await element.waitFor();
     const isMultipleAttr = await element.getAttribute("multiple");
     const isMultiple = isMultipleAttr !== null;
+=======
+      // Get all dropdown options text
+      async getAllOptionsText(elementDrag:Locator): Promise<string[]> {
+        await elementDrag.waitFor();
+        const options = await elementDrag.allInnerTexts();
+        return options.map(text => text.trim());
+      }
+>>>>>>> local
 
     if (isMultiple) {
       console.log("Dropdown is: multi-select");
@@ -197,6 +206,7 @@ export class WebUtil {
     return await this.page.frame({ name: frameName });
   }
 
+<<<<<<< remotes/origin/playwright_with_TS
   //  Get parent frame of a frame
   async getParentFrame(frame: Frame) {
     return frame.parentFrame();
@@ -242,4 +252,59 @@ export class WebUtil {
     }
     return newTab;
   }
+=======
+//  Get parent frame of a frame
+ async getParentFrame(frame: Frame) {
+  return frame.parentFrame();
+}
+ ////////////////////////// windows handles:
+  async switchToWindowByTitle(expectedTitle: string): Promise<Page> {
+  await this.page.context().waitForEvent('page');
+  const pages: Page[] = this.page.context().pages();
+  console.log("Total pages:", pages.length);
+
+  for (const p of pages) {
+    await p.waitForLoadState();
+    const title = await p.title();
+    console.log("Page title:", title);
+    if (title.includes(expectedTitle)) {
+      await p.bringToFront();
+      return p;
+    }
+  }
+  throw new Error("Window not found: " + expectedTitle);
+}
+
+  async switchToWindowByUrl(expectedUrl: string) {
+      await this.page.context().waitForEvent('page');
+    const pagesArray: Page[] = this.page.context().pages();
+    for (let i = 0; i < pagesArray.length; i++) {
+      let pg: Page = pagesArray[i];
+      let pagrUrl: string = await pg.url();
+      if (pagrUrl.includes(expectedUrl)) {
+        await pg.bringToFront();
+        return pg;
+        break;
+      }
+    }
+  }
+
+  async switchToWindowByTitles(expectedTitle: string) {
+      await this.page.context().waitForEvent('page');
+    const pagesArray: Page[] = this.page.context().pages();
+    let newTab: Page=this.page;
+    for (let i = 0; i < pagesArray.length; i++) {
+      let pg: Page = pagesArray[i];
+      let pageTitle: string = await pg.title();
+      if (pageTitle.includes(expectedTitle)) {
+        console.log("Switch for new tab.")
+        newTab = pg;
+        break;
+      }
+    }
+    return newTab;
+  }
+
+  
+>>>>>>> local
 }
